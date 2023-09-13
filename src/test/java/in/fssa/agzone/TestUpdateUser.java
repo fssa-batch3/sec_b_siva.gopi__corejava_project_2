@@ -15,19 +15,33 @@ import in.fssa.agzone.service.UserService;
 public class TestUpdateUser {
 	
 	//Test Update User With Validate Data
+	
+	@Test
 	public void testUpdateUserWithValidData() {
 		UserService userService = new UserService();
 
 		User newUser = new User();
 
+		long min = 6000000001l; // Minimum value for the random number
+		long max = 9999999999l; // Maximum value for the random number
+		int numberOfRandomNumbers = 100; // Set the number of random numbers you want to generate
+
+		Random rand = new Random();
+		long randomNumber = 0;
+		for (int i = 0; i < numberOfRandomNumbers; i++) {
+			randomNumber = rand.nextLong(max - min + 1) + min;
+
+		}
+		System.out.println("User update Succesfully With Valid Data");
+
 		newUser.setName("Siva");
-		newUser.setMobileNumber(8270148693l);
-		newUser.setDistrict("Sivaganagi");
+		newUser.setMobileNumber(randomNumber);
+		newUser.setDistrict("Sivagangai");
 		newUser.setTown("Manamadurai");
 		newUser.setPassword("S1i2v3@A4");
 
 		assertDoesNotThrow(() -> {
-			userService.updateUser(8270148693l , newUser);
+			userService.createUser(newUser);
 		});
 
 	}
